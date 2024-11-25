@@ -5,8 +5,8 @@ const cors = require('cors');  // Import the cors package
 const path = require('path')
 const app = express();
 const routes = require('./routes/index'); // Ensure this is the correct path
-const authRoutes = require('./routes/authRoutes');
-const phoneNumberRoutes = require('./routes/phoneNumberRoutes');
+//const authRoutes = require('./routes/authRoutes');
+//const phoneNumberRoutes = require('./routes/phoneNumberRoutes');
 // Sample protected route (replace with your routes)
 const authenticateJWT = require('./middleware/auth');
 // Folder containing files
@@ -18,9 +18,9 @@ app.use(cors());
 // }));
 app.use(express.json());
 app.use(routes); // This is where the error is likely happening
-app.use('/api/phone-numbers', phoneNumberRoutes);
+//app.use('/api/phone-numbers', phoneNumberRoutes);
 // Use the authentication routes
-app.use('/api/auth', authRoutes);
+//app.use('/api/auth', authRoutes);
 app.get('/admin', authenticateJWT(['admin']), (req, res) => {
   res.json({ message: 'Welcome Admin!' });
 });
@@ -38,7 +38,7 @@ app.get('/files', (req, res) => {
     }
 
     // Filter files that contain the date string
-    const matchingFiles = files.filter(file => file.includes(date)).map(file => `http://localhost:3000/file?filename=${file}`)
+    const matchingFiles = files.filter(file => file.includes(date)).map(file => `https://70.42.223.135/file?filename=${file}`)
     res.json({ files: matchingFiles });
   });
 });
